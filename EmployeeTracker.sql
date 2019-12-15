@@ -12,12 +12,13 @@ CREATE TABLE department (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE employeerole (
+CREATE TABLE role (
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(30),
   salary INT(7),
   department_id INT(50),
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
 CREATE TABLE employee(
@@ -25,8 +26,8 @@ CREATE TABLE employee(
   first_name VARCHAR(30),
   last_name VARCHAR(30),
   role_id INT(50),
-  manager_id INT(50),
-  primary key (id)
+  primary key (id),
+  CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
 INSERT INTO department(name)
@@ -35,22 +36,24 @@ VALUES ('Sales'),
        ('Finance'),
        ('Legal');
 
-INSERT INTO employeerole(title, salary, department_id)
+INSERT INTO role(title, salary, department_id)
 VALUES ('Sales Lead', 100000, 1),
-       ('Salesperson', 80000, 2),
-       ('Lead Engineer', 150000, 3),
-       ('Software Engineer', 120000, 4),
-       ('Accountant', 125000, 5),
-       ('Legal Team Lead', 250000, 6),
-       ('Lawyer', 190000, 7),
-       ('Lead Engineer', 150000, 8);
+       ('Salesperson', 80000, 1),
+       ('Lead Engineer', 150000, 2),
+       ('Software Engineer', 120000, 2),
+       ('Accountant', 125000, 3),
+       ('Legal Team Lead', 250000, 4),
+       ('Lawyer', 190000, 4),
+       ('Lead Engineer', 150000, 2);
 
-INSERT INTO employee(first_name, last_name, role_id, manager_id)
-VALUES ('John', 'Doe', 1, 1),
-       ('Mike', 'Chan', 2, 2),
-       ('Ashley', 'Rodrigues', 3, 3),
-       ('Kevin', 'Tupik', 4, 4),
-       ('Malia', 'Brown', 5, 5),
-       ('Sarah', 'Lourd', 6, 6),
-       ('Tom', 'Allen', 7, 7),
-       ('Christian', 'Eckenrode', 8, 8);
+INSERT INTO employee(first_name, last_name, role_id)
+VALUES ('John', 'Doe', 1),
+       ('Mike', 'Chan', 2),
+       ('Ashley', 'Rodrigues', 3),
+       ('Kevin', 'Tupik', 4),
+       ('Malia', 'Brown', 5),
+       ('Sarah', 'Lourd', 6),
+       ('Tom', 'Allen', 7),
+       ('Christian', 'Eckenrode', 3);
+
+      ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Pa55w0rd';
