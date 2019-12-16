@@ -1,8 +1,10 @@
 const inquirer = require('inquirer');
 var mysql = require("mysql");
 var connection = require('./connect.js');
-const {viewEmployees,viewByDepartment,viewByRoles,viewDepartments,viewRoles,addEmployee,addDepartment}  = require('./assets/view');
-//const viewByDepartment = require('./assets/view');
+const {viewEmployees,viewByDepartment,viewByRoles,viewDepartments,viewRoles}  = require('./assets/view');
+const {addEmployee,addDepartment,addRole} = require('./assets/add.js');
+const updateEmployee = require('./assets/update.js')
+
 
  function init(){
    
@@ -16,10 +18,10 @@ const {viewEmployees,viewByDepartment,viewByRoles,viewDepartments,viewRoles,addE
                    "View Departments", 
                    "View Roles",
                    "Add Employee",
-                   "Add Departments"
-                //    "Add Role", 
-                //    "Update Employee DETAILS",
-                //    "CLOSE APPLICATION",
+                   "Add Departments",
+                   "Add Role", 
+                   "Update Employee roles",
+                   "CLOSE APPLICATION"
         ]
       })
 
@@ -63,14 +65,13 @@ const {viewEmployees,viewByDepartment,viewByRoles,viewDepartments,viewRoles,addE
             break;
     
         case "Add Role":
-            viewByDepartments();
             addRole();
+            setTimeout(init, 15000);
             break;
     
-        // case "Update Employee Roles":
-        //     employeesJSON();
-        //     viewByRoles();
-        //     break;
+        case "Update Employee roles":
+            updateEmployee();
+            break;
                 
         case "CLOSE APPLICATION":
             connection.end();
