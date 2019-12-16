@@ -3,7 +3,7 @@ var mysql = require("mysql");
 var connection = require('./connect.js');
 const {viewEmployees,viewByDepartment,viewByRoles,viewDepartments,viewRoles}  = require('./assets/view');
 const {addEmployee,addDepartment,addRole} = require('./assets/add.js');
-const updateEmployee = require('./assets/update.js')
+const updateEmployee = require('./assets/update.js');
 
 
  function init(){
@@ -21,7 +21,7 @@ const updateEmployee = require('./assets/update.js')
                    "Add Departments",
                    "Add Role", 
                    "Update Employee roles",
-                   "CLOSE APPLICATION"
+                   "Exit application"
         ]
       })
 
@@ -71,11 +71,12 @@ const updateEmployee = require('./assets/update.js')
     
         case "Update Employee roles":
             updateEmployee();
+            setTimeout(init, 15000);
             break;
                 
-        case "CLOSE APPLICATION":
+        case "Exit application":
             connection.end();
-            console.log("Have a Nice Day ... !!!");
+            console.log("Thank you for using this application ... !!!");
             process.exit();
             break;
          
